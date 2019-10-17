@@ -1,7 +1,9 @@
 #include 'protheus.ch'
 
+#define _EVAL '~>'
+
 /*/{Protheus.doc} ApiData
-Classe respons?vel pelo registro dos dados, o qual cont?m objetos do tipo ApiElement.
+Classe responsável pelo registro dos dados, o qual contém objetos do tipo ApiElement.
 @type class
 @author Gustavo Marttos
 @since 20/02/2018
@@ -31,8 +33,8 @@ Construtor da classe ApiData. Inicia o vetor Elements.
 @param cAlias, characters, Nome da tabela a ser consultada.
 @param aFields, array, Campos da tabela que devem ser retornados.
 @param aExcluded, array, Campos da tabela que devem ser desconsiderados.
-@param lCustom, boolean, Se o alias ? customizado.
-@return Self, Inst?ncia da classe.
+@param lCustom, boolean, Se o alias é customizado.
+@return Self, Instância da classe.
 @example ApiData():New(cAlias)
 /*/
 Method New(cAlias, aFields, aExcluded, lCustom) Class ApiData
@@ -51,8 +53,8 @@ Inclui no vetor ::Elements um objeto do tipo ApiElement.
 @author Gustavo Marttos
 @since 20/02/2018
 @version 1.0
-@param oElement, object, Objeto do tipo ApiElement a ser inclu?do no array ::Elements.
-@return Self, Inst?ncia da classe.
+@param oElement, object, Objeto do tipo ApiElement a ser incluído no array ::Elements.
+@return Self, Instância da classe.
 /*/
 Method Add(oElement) Class ApiData
     aAdd(::Elements, oElement)
@@ -71,13 +73,13 @@ Return ::Elements
 
 /*/{Protheus.doc} SetIgnoreEmpty
 Define a propriedade booleana IgnoreEmpty.
-Se .T., ser? validado se a concatena??o de todos os dados da linha ? vazio.
+Se .T., será validado se a concatenação de todos os dados da linha é vazia.
 @type function
 @author Gustavo Marttos
 @since 24/09/2019
 @version 1.0
-@param lIgnore, boolean, Se deve ignorar resultados vazios ou n?o (default .F.).
-@return Self, Inst?ncia da classe.
+@param lIgnore, boolean, Se deve ignorar resultados vazios ou não (default .F.).
+@return Self, Instância da classe.
 /*/
 Method SetIgnoreEmpty(lIgnore) Class ApiData
     Default lIgnore := .F.
@@ -91,7 +93,7 @@ Verifica por meio do valor da propriedade booleana IgnoreEmpty se deve ignorar v
 @author Gustavo Marttos
 @since 24/09/2019
 @version 1.0
-@return boolean, Se os resultados vazios dever?o ser ignorados.
+@return boolean, Se os resultados vazios deverão ser ignorados.
 /*/
 Method IsIgnoringEmpty() Class ApiData
 Return ::IgnoreEmpty == 1
@@ -103,14 +105,14 @@ Popula ::Elements com os dados da tabela.
 @since 12/06/2019
 @version 1.0
 @param nCount, numeric, Quantidade de registros a serem retornados.
-@param nIndex, numeric, ?ndice a partir do qual deve ser retornado.
+@param nIndex, numeric, índice a partir do qual deve ser retornado.
 @param cFilter, characters, Filtro em AdvPL a ser aplicado no alias.
 @param cAlias, characters, Nome do alias de consulta.
-@return Self, Inst?ncia da classe.
+@return Self, Instância da classe.
 @obs
-    - Filtros n?o podem conter fun??es de usu?rio;
-    - Se o valor do campo for de tipo caracter, for customizado e come?ar com const::_EVAL (~>),
-        ser? interpretado que este deve ser executado como um comando AdvPL.
+    - Filtros não podem conter funções de usuário;
+    - Se o valor do campo for de tipo caracter, for customizado e começar com const::_EVAL (~>),
+        será interpretado que este deve ser executado como um comando AdvPL.
         Exemplo: campo Z99_DTOS com o valor '~>DToS(dDatabase)'.
 /*/
 Method Run(nCount, nIndex, cFilter, cAlias) Class ApiData
